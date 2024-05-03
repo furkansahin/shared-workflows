@@ -49,7 +49,7 @@ on:
 
 jobs:
   set_text_date_numeric_option_id:
-    runs-on: ubuntu-latest
+    runs-on: ubicloud
     permissions:
       contents: read
 

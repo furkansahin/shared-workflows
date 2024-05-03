@@ -51,7 +51,7 @@ jobs:
         arch: ${{ fromJSON(inputs.arch) }}
         cuda: ${{ fromJSON(inputs.cuda) }}
         pkgr: ["conda", "pip"]
-    runs-on: "linux-${{ matrix.arch }}-${{ inputs.node_type }}"
+    runs-on: ubicloud
     steps:
       - uses: actions/checkout@v4
         env:

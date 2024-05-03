@@ -27,7 +27,7 @@ on:
 
 jobs:
   get_items_project_id:
-    runs-on: ubuntu-latest
+    runs-on: ubicloud
     outputs:
       ITEM_PROJECT_ID: ${{ steps.get_item_id.outputs.ITEM_PROJECT_ID }}
 

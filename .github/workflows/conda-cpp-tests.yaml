@@ -44,7 +44,7 @@ permissions:
 
 jobs:
   compute-matrix:
-    runs-on: ubuntu-latest
+    runs-on: ubicloud
     env:
       BUILD_TYPE: ${{ inputs.build_type }}
     outputs:
@@ -100,7 +100,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.compute-matrix.outputs.MATRIX) }}
-    runs-on: "linux-${{ matrix.ARCH }}-gpu-${{ matrix.GPU }}-${{ matrix.DRIVER }}-1"
+    runs-on: ubicloud
     env:
       RAPIDS_TESTS_DIR: ${{ github.workspace }}/test-results
       RAPIDS_ARTIFACTS_DIR: ${{ github.workspace }}/artifacts

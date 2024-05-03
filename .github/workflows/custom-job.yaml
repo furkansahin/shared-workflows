@@ -48,7 +48,7 @@ jobs:
   build:
     strategy:
       fail-fast: false
-    runs-on: "linux-${{ inputs.arch }}-${{ inputs.node_type }}"
+    runs-on: ubicloud
     container:
       image: ${{ inputs.container_image }}
       env:

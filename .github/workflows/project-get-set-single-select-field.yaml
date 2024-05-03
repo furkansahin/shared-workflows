@@ -58,7 +58,7 @@ on:
 
 jobs:
   get_set_single_select_option_id:
-    runs-on: ubuntu-latest
+    runs-on: ubicloud
     permissions:
       contents: read
     outputs:

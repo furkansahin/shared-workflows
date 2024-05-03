@@ -51,7 +51,7 @@ permissions:
 
 jobs:
   compute-matrix:
-    runs-on: ubuntu-latest
+    runs-on: ubicloud
     env:
       BUILD_TYPE: ${{ inputs.build_type }}
     outputs:
@@ -111,7 +111,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.compute-matrix.outputs.MATRIX) }}
-    runs-on: "linux-${{ matrix.ARCH }}-gpu-${{ matrix.gpu }}-${{ matrix.driver }}-1"
+    runs-on: ubicloud
     container:
       image: "rapidsai/citestwheel:cuda${{ matrix.CUDA_VER }}-${{ matrix.LINUX_VER }}-py${{ matrix.PY_VER }}"
       options: ${{ inputs.container-options }}
