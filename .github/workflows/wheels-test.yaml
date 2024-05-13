@@ -51,7 +51,7 @@ permissions:
 
 jobs:
   compute-matrix:
-    runs-on: ubicloud
+    runs-on: ubicloud-gpu-standard-1-latest
     env:
       BUILD_TYPE: ${{ inputs.build_type }}
     outputs:
@@ -76,21 +76,10 @@ jobs:
             pull-request:
               # amd64
               - { ARCH: 'amd64', PY_VER: '3.9',  CUDA_VER: '12.2.2', LINUX_VER: 'ubuntu22.04', gpu: 'v100', driver: 'latest' }
-              # arm64
-              - { ARCH: 'arm64', PY_VER: '3.11', CUDA_VER: '11.8.0', LINUX_VER: 'ubuntu20.04', gpu: 'a100', driver: 'latest' }
             nightly:
               # amd64
-              - { ARCH: 'amd64', PY_VER: '3.9',  CUDA_VER: '11.8.0', LINUX_VER: 'ubuntu20.04', gpu: 'v100', driver: 'latest' }
               - { ARCH: 'amd64', PY_VER: '3.9',  CUDA_VER: '12.2.2', LINUX_VER: 'ubuntu22.04', gpu: 'v100', driver: 'latest' }
-              - { ARCH: 'amd64', PY_VER: '3.10', CUDA_VER: '11.8.0', LINUX_VER: 'ubuntu22.04', gpu: 'v100', driver: 'latest' }
-              - { ARCH: 'amd64', PY_VER: '3.10', CUDA_VER: '12.0.1', LINUX_VER: 'ubuntu20.04', gpu: 'v100', driver: 'latest' }
-              - { ARCH: 'amd64', PY_VER: '3.11', CUDA_VER: '12.0.1', LINUX_VER: 'ubuntu20.04', gpu: 'v100', driver: 'latest' }
               - { ARCH: 'amd64', PY_VER: '3.11', CUDA_VER: '12.2.2', LINUX_VER: 'ubuntu22.04', gpu: 'v100', driver: 'latest' }
-              # arm64
-              - { ARCH: 'arm64', PY_VER: '3.9',  CUDA_VER: '11.8.0', LINUX_VER: 'ubuntu20.04', gpu: 'a100', driver: 'latest' }
-              - { ARCH: 'arm64', PY_VER: '3.10', CUDA_VER: '12.0.1', LINUX_VER: 'ubuntu20.04', gpu: 'a100', driver: 'latest' }
-              - { ARCH: 'arm64', PY_VER: '3.10', CUDA_VER: '12.2.2', LINUX_VER: 'ubuntu22.04', gpu: 'a100', driver: 'latest' }
-              - { ARCH: 'arm64', PY_VER: '3.11', CUDA_VER: '11.8.0', LINUX_VER: 'ubuntu22.04', gpu: 'a100', driver: 'latest' }
           "
 
           TEST_MATRIX=$(yq -n 'env(MATRICES) | .[strenv(BUILD_TYPE)]')
@@ -111,7 +100,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.compute-matrix.outputs.MATRIX) }}
-    runs-on: ubicloud
+    runs-on: ubicloud-gpu-standard-1-latest
     container:
       image: "rapidsai/citestwheel:cuda${{ matrix.CUDA_VER }}-${{ matrix.LINUX_VER }}-py${{ matrix.PY_VER }}"
       options: ${{ inputs.container-options }}
