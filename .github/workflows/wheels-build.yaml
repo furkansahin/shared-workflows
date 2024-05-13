@@ -82,9 +82,9 @@ jobs:
           #
           export MATRIX="
           # amd64
-          - { ARCH: 'amd64', PY_VER: '3.9',  CUDA_VER: '12.2.2', LINUX_VER: 'ubuntu20.04' }
-          - { ARCH: 'amd64', PY_VER: '3.10', CUDA_VER: '12.2.2', LINUX_VER: 'ubuntu20.04' }
-          - { ARCH: 'amd64', PY_VER: '3.11', CUDA_VER: '12.2.2', LINUX_VER: 'ubuntu20.04' }
+          - { ARCH: 'amd64', PY_VER: '3.9',  CUDA_VER: '12.2.2', LINUX_VER: 'ubuntu22.04' }
+          - { ARCH: 'amd64', PY_VER: '3.10', CUDA_VER: '12.2.2', LINUX_VER: 'ubuntu22.04' }
+          - { ARCH: 'amd64', PY_VER: '3.11', CUDA_VER: '12.2.2', LINUX_VER: 'ubuntu22.04' }
           "
 
           MATRIX="$(
@@ -102,7 +102,7 @@ jobs:
     env:
       RAPIDS_ARTIFACTS_DIR: ${{ github.workspace }}/artifacts
     container:
-      image: "rapidsai/ci-wheel:cuda${{ matrix.CUDA_VER }}-${{ matrix.LINUX_VER }}-py${{ matrix.PY_VER }}"
+      image: "rapidsai/devcontainers:24.06-cpp-cuda12.2-ubuntu22.04"
       env:
         RAPIDS_BUILD_TYPE: ${{ inputs.build_type }}
 
