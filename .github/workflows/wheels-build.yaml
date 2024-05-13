@@ -118,7 +118,9 @@ jobs:
           ref: ${{ inputs.sha }}
           fetch-depth: 0 # unshallow fetch for setuptools-scm
           persist-credentials: false
-
+      - name: add exception
+        run: |
+          git config --global --add safe.directory /__w/cudf/cudf
       - name: Standardize repository information
         uses: furkansahin/shared-actions/rapids-github-info@main
         with:
